@@ -791,6 +791,54 @@
             transform: scale(1.05); /* Небольшое увеличение при наведении */
         }
         /* ---- КОНЕЦ НОВОЙ СЕКЦИИ ---- */
+        /* --- Стили для центрирования карты --- */
+.map-wrapper {
+    position: relative; /* Для правильного позиционирования ссылок внутри */
+    width: 100%;
+    max-width: 900px; /* Максимальная ширина карты. Можешь изменить */
+    margin: 20px auto; /* Центрируем блок по горизонтали */
+    border: 3px solid var(--gold); /* Золотая рамка */
+    border-radius: 20px; /* Скругленные углы */
+    overflow: hidden; /* Обрезает содержимое, чтобы рамка была ровной */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Тень */
+    height: 445px; /* Фиксированная высота для области карты */
+}
+
+.map-wrapper iframe {
+    display: block; /* Убираем лишние отступы */
+    width: 100%; /* Iframe занимает всю ширину родителя */
+    height: 100%; /* Iframe занимает всю высоту родителя */
+    border: none; /* Убираем стандартную рамку iframe */
+    z-index: 1; /* Если ссылки будут перекрываться, это может помочь */
+}
+
+/* Стили для маленьких ссылок-подписей Яндекса, которые расположены ПОВЕРХ карты */
+/* Если они тебе не нужны или они мешают, можешь удалить этот блок CSS и сами <a> теги в HTML */
+.map-wrapper a {
+    color: var(--gold) !important; /* Делаем цвет золотым, !important для перекрытия инлайн стилей Яндекса */
+    font-size: 13px !important; /* Чуть крупнее */
+    position: absolute;
+    left: 10px; /* Отступ слева от края контейнера */
+    padding: 2px 5px; /* Небольшой внутренний отступ для фона */
+    background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный фон для лучшей видимости */
+    border-radius: 3px;
+    z-index: 10; /* Убедимся, что они поверх iframe */
+    text-decoration: none; /* Убираем подчеркивание */
+    transition: background-color 0.3s ease;
+}
+
+.map-wrapper a:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.map-wrapper a:nth-of-type(1) { /* Первая ссылка: "Олимп" */
+    top: 10px; /* Отступ сверху от края контейнера */
+}
+
+.map-wrapper a:nth-of-type(2) { /* Вторая ссылка: "Бизнес-центр в Набережных Челнах" */
+    top: 34px; /* Отступ сверху (10px + высота первой ссылки + немного отступа) */
+}
+/* --- Конец стилей для центрирования карты --- */
     </style>
 </head>
 <body>
@@ -1019,13 +1067,29 @@
         </div>
     </section>
 
-    <section id="map-sec">
+<section id="map-sec">
         <div class="glass-panel">
             <h2 class="section-title">Наш адрес</h2>
             <p style="text-align:center; font-weight:900; color:var(--accent-text); margin-bottom:20px;">Автозаводский проспект, 22А (Бизнес-Центр)</p>
-            <div id="map-box">
-            <div style="position:relative;overflow:hidden;"><a href="https://yandex.ru/maps/org/olimp/221352569028/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Олимп</a><a href="https://yandex.ru/maps/236/naberezhnye-chelny/category/business_center/184107509/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:14px;">Бизнес-центр в Набережных Челнах</a><iframe src="https://yandex.ru/map-widget/v1/?indoorLevel=1&ll=52.428172%2C55.756513&mode=poi&poi%5Bpoint%5D=52.427751%2C55.756797&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D221352569028&z=16.81" width="1280" height="720" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
-        </section>
+            
+            <!-- ИСПРАВЛЕННЫЙ БЛОК ДЛЯ КАРТЫ -->
+            <div class="map-wrapper"> 
+                <!-- ВАЖНО: ВОЗВРАЩЕН ИСХОДНЫЙ SRC ЯНДЕКС КАРТЫ С УКАЗАНИЕМ ТОЧКИ "ОЛИМП" -->
+                <iframe src="https://yandex.ru/map-widget/v1/?from=mapframe&ll=52.428398%2C55.756771&mode=poi&poi%5Bpoint%5D=52.427751%2C55.756797&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D221352569028&z=17.-99" 
+                        width="100%" 
+                        height="445" 
+                        frameborder="0" 
+                        allowfullscreen="true"></iframe>
+                
+                <!-- Эти ссылки - это текстовые подписи Яндекса, которые отображаются поверх карты.
+                     Если они тебе не нужны, можешь их удалить. -->
+                <a href="https://yandex.ru/maps/org/olimp/221352569028/?utm_medium=mapframe&utm_source=maps">Олимп</a>
+                <a href="https://yandex.ru/maps/236/naberezhnye-chelny/category/business_center/184107509/?utm_medium=mapframe&utm_source=maps">Бизнес-центр в Набережных Челнах</a>
+            </div>
+            <!-- КОНЕЦ ИСПРАВЛЕННОГО БЛОКА -->
+            
+        </div>
+    </section>
 
 </div>
 
