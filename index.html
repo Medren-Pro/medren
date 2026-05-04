@@ -104,21 +104,23 @@
             transform: translateY(-2px);
         }
         
-        /* Адаптация шапки для мобильных */
+        /* Адаптация шапки и кнопок мессенджеров для мобильных */
         @media (max-width: 768px) { 
             nav { display: none; }
             .header-flex { justify-content: space-between; }
             .logo-img { height: 40px; }
             .logo-text { font-size: 18px; }
             .logo-text span { font-size: 8px; }
-            .h-phone { font-size: 16px; margin-left: 10px; } /* Адаптируем существующую кнопку */
+            .h-phone { font-size: 16px; margin-left: 10px; }
 
             /* Стили для кнопок мессенджеров на мобильных */
             .floats { 
                 bottom: 20px; right: 20px;
                 flex-direction: row;
                 gap: 10px;
-                width: fit-content;
+                width: fit-content; /* Ширина по содержимому */
+                flex-wrap: wrap; /* Разрешаем перенос на следующую строку, если кнопок много */
+                justify-content: flex-end; /* Выравниваем по правому краю */
             }
             .f-btn { 
                 width: 55px; height: 55px; font-size: 26px;
@@ -161,360 +163,11 @@
             animation: fadeInUp 1s ease-out forwards;
             animation-delay: 0.6s;
         }
-        .trust-card { 
-            background: var(--glass); 
+        .trust-card {background: var(--glass); 
             padding: 25px;
             border-radius: 15px; 
             border: 1px solid var(--glass-border); 
-            text-align: center;transition: transform 0.3s ease, background-color 0.3s ease;
-        }
-        .trust-card:hover {
-            transform: translateY(-8px);
-            background-color: rgba(255, 255, 255, 0.18);
-        }
-        .trust-card i { 
-            font-size: 36px;
-            color: var(--accent-text); 
-            margin-bottom: 12px;
-        }
-        .trust-card h4 { font-size: 1.2em; margin-bottom: 8px; color: var(--white); }
-        .trust-card p { font-size: 0.9em; color: rgba(255, 255, 255, 0.7); }
-
-        section { padding: 70px 0; }
-        .glass-panel { 
-            background: var(--glass); 
-            backdrop-filter: blur(20px); 
-            border-radius: 30px; 
-            padding: 40px; 
-            border: 1px solid var(--glass-border); 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
-        }
-        .section-title { 
-            text-align: center; 
-            margin-bottom: 40px; 
-            font-size: clamp(28px, 4vw, 38px);
-            color: var(--accent-text); 
-            text-transform: uppercase; 
-            font-weight: 900; 
-            position: relative;
-            padding-bottom: 15px;
-        }
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background-color: var(--accent-text);
-            border-radius: 2px;
-        }
-
-        .doc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .doc-card { 
-            background: rgba(0,0,0,0.3); 
-            border-radius: 20px; 
-            overflow: hidden; 
-            border: 1px solid var(--glass-border); 
-            text-align: center; 
-            transition: 0.3s; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-        .doc-card:hover { 
-            border-color: var(--gold); 
-            transform: translateY(-5px); 
-            box-shadow: 0 15px 40px rgba(212,175,55,0.3);
-        }
-        .doc-img { 
-            width: 100%; 
-            height: 380px; 
-            object-fit: cover;
-            display: block;
-        }
-        .doc-info { padding: 20px; }
-        .doc-info h3 { color: var(--white); font-size: 20px; margin-bottom: 5px; }
-        .doc-info p { color: rgba(255,255,255,0.7); font-size: 14px;}
-
-        /* ПРАЙС КАТЕГОРИИ */
-        .price-cat { 
-            margin-bottom: 15px; 
-            border-radius: 15px; 
-            overflow: hidden; 
-            border: 1px solid var(--glass-border); 
-            background: rgba(0,0,0,0.2); 
-            transition: box-shadow 0.3s ease;
-        }
-        .price-cat:hover { box-shadow: 0 0 20px rgba(212,175,55,0.2); }
-
-        .price-head { 
-            padding: 20px; 
-            cursor: pointer; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            font-weight: 900; 
-            text-transform: uppercase; 
-            color: var(--accent-text); 
-            background: rgba(212,175,55,0.1); 
-            transition: background-color 0.3s ease;
-        }
-        .price-head:hover { background-color: rgba(212,175,55,0.2); }
-        .price-head i { transition: 0.3s; }
-        .price-body { 
-            display: none;
-            padding: 10px 0; 
-            background: rgba(0,0,0,0.3); 
-        }
-        .price-cat.active .price-body { display: block; }
-        .price-cat.active .price-head i { transform: rotate(180deg); }
-
-        .p-row { 
-            padding: 20px; 
-            border-bottom: 1px solid rgba(255,255,255,0.05); 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 10px; 
-            align-items: center; 
-        }
-        .p-row:last-child { border-bottom: none; }
-        .p-name { 
-            font-weight: 700; 
-            font-size: 17px; 
-            color: var(--white); 
-            flex-basis: 100%; 
-        }
-        .p-time { 
-            font-size: 12px; 
-            color: var(--accent-text); 
-            font-weight: 800; 
-            text-transform: uppercase; 
-            margin-top: 5px; 
-            flex-basis: 100%; 
-        }
-        .p-price { 
-            font-weight: 900; 
-            color: #4ade80; 
-            font-size: 20px; 
-            margin-left: auto; 
-            flex-shrink: 0; 
-        }
-        
-        /* ИЗМЕНЕННЫЙ СТИЛЬ ДЛЯ .p-desc (Вариант 1) */
-        .p-desc { 
-            font-size: 13px; 
-            color: #E0E0E0; /* Светло-серый, не слишком темный */
-            margin-top: 10px; 
-            padding: 10px 15px;
-            border-left: 4px solid var(--gold); /* Золотая полоска слева */
-            background: rgba(255, 255, 255, 0.08); /* Легкий фон */
-            border-radius: 4px; 
-            flex-basis: 100%; 
-            font-style: italic; /* Курсив */
-            box-shadow: inset 5px 0 0 -2px rgba(212,175,55,0.3); /* Внутренняя тень */
-        }
-
-        /* ОФИЦИАЛЬНЫЕ БЛАНКИ */
-        .blanks-grid { 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 30px; 
-            justify-content: center; 
-        }
-        .official-blank { 
-            background: #fff; 
-            color: #333; 
-            width: 100%; 
-            max-width: 500px; 
-            padding: 40px; 
-            border-radius: 8px; 
-            position: relative; 
-            font-family: 'Times New Roman', serif; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5); 
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(0,0,0,0.1);
-        }
-        .official-blank:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px rgba(212,175,55,0.2);
-        }
-        .blank-header { 
-            text-align: center; 
-            border-bottom: 2px solid #333; 
-            padding-bottom: 10px; 
-            margin-bottom: 20px; 
-            font-size: 16px;
-        }
-        .blank-header h4 { margin: 0; }
-
-        .stamp { 
-            border: 4px double #2c3e8c; 
-            color: #2c3e8c; 
-            width: 110px; 
-            height: 110px; 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            text-align: center; 
-            font-size: 9px; 
-            font-weight: bold; 
-            position: absolute; 
-            bottom: 30px; 
-            right: 30px; 
-            transform: rotate(-15deg); 
-            opacity: 0.4; 
-            pointer-events: none; 
-        }
-
-        #map-box { 
-            height: 450px; 
-            border-radius: 20px; 
-            border: 3px solid var(--gold); 
-            overflow: hidden; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        /* КНОПКИ СВЯЗИ (Floats) */
-        .floats { 
-            position: fixed; 
-            bottom: 30px; 
-            right: 30px; 
-            z-index: 2000; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 15px; 
-        }
-        .f-btn { 
-            width: 75px; 
-            height: 75px; 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            color: white; 
-            font-size: 38px; 
-            text-decoration: none; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5); 
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .f-btn:hover { 
-            transform: scale(1.1) rotate(5deg); 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-        }
-        .f-wa { background: #25D366; }
-        .f\.logo-text { color: var(--accent-text); font-size: 22px; font-weight: 900; line-height: 0.9; }
-        .logo-text span { font-size: 10px; color: var(--white); letter-spacing: 2px; }
-
-        nav ul { 
-            display: flex; 
-            list-style: none; 
-            gap: 25px;
-        }
-        nav a { 
-            color: var(--white); 
-            text-decoration: none; 
-            font-size: 11px; 
-            font-weight: 700; 
-            text-transform: uppercase; 
-            letter-spacing: 1px; 
-            transition: color 0.3s ease;
-        }
-        nav a:hover { color: var(--accent-text); }
-        .h-phone { 
-            color: var(--accent-text); 
-            font-size: 18px; 
-            font-weight: 900; 
-            text-decoration: none; 
-            transition: color 0.3s ease;
-        }
-        .h-phone:hover { color: var(--white); }
-
-        /* Кнопка "Стационар" / "Галерея" */
-        .header-nav-link { 
-            display: inline-block;
-            margin-left: 15px;
-            padding: 10px 20px;
-            background-color: rgba(255, 255, 255, 0.15);
-            color: var(--white);
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: 700;
-            font-size: 12px;
-            letter-spacing: 0.5px;
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-            border: 1px solid var(--glass-border);
-        }
-
-        .header-nav-link:hover {
-            background-color: var(--accent-text);
-            color: #1a1a1a;
-            transform: translateY(-2px);
-        }
-        
-        /* Адаптация шапки для мобильных */
-        @media (max-width: 768px) { 
-            nav { display: none; }
-            .header-flex { justify-content: space-between; }
-            .logo-img { height: 40px; }
-            .logo-text { font-size: 18px; }
-            .logo-text span { font-size: 8px; }
-            .h-phone { font-size: 16px; margin-left: 10px; } /* Адаптируем существующую кнопку */
-
-            /* Стили для кнопок мессенджеров на мобильных */
-            .floats { 
-                bottom: 20px; right: 20px;
-                flex-direction: row;
-                gap: 10px;
-                width: fit-content;
-            }
-            .f-btn { 
-                width: 55px; height: 55px; font-size: 26px;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-            }
-            .f-btn:hover { transform: scale(1.05) rotate(0deg); } /* Убираем вращение на мобильных */
-        }
-
-        /* --- Стили для "заманивания" --- */
-        .hero { 
-            padding: 140px 0 60px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero h1 { 
-            font-size: clamp(28px, 5vw, 50px);
-            font-weight: 900; 
-            text-transform: uppercase; 
-            margin-bottom: 10px; 
-            color: var(--accent-text); 
-            animation: fadeInUp 1s ease-out forwards;
-            opacity: 0;
-        }
-        .hero p { 
-            font-size: clamp(16px, 2vw, 22px);
-            margin-bottom: 40px;
-            color: rgba(255, 255, 255, 0.8);
-            animation: fadeInUp 1s ease-out forwards;
-            animation-delay: 0.3s;
-            opacity: 0;
-        }
-        .trust-box { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-            gap: 30px;
-            margin-top: 30px; 
-            opacity: 0;
-            animation: fadeInUp 1s ease-out forwards;
-            animation-delay: 0.6s;
-        }
-        .trust-card { 
-            background: var(--glass); 
-            padding: 25px;
-            border-radius: 15px; 
-            border: 1px solid var(--glass-border); 
-            text-align: center; 
             transition: transform 0.3s ease, background-color 0.3s ease;
         }
         .trust-card:hover {
@@ -620,7 +273,7 @@
 
         .p-row { 
             padding: 20px; 
-            border-bottom: 1px solid rgba(255,255,255,0.05); 
+            border-bottom: 1px solidrgba(255,255,255,0.05); 
             display: flex; 
             flex-wrap: wrap; 
             gap: 10px; 
@@ -649,7 +302,7 @@
             flex-shrink: 0; 
         }
         
-        /* ИЗМЕНЕННЫЙ СТИЛЬ ДЛЯ .p-desc (Вариант 1) */
+        /* ИЗМЕНЕННЫЙ СТИЛЬ ДЛЯ .p-desc */
         .p-desc { 
             font-size: 13px; 
             color: #E0E0E0; /* Светло-серый, не слишком темный */
@@ -716,13 +369,89 @@
             pointer-events: none; 
         }
 
-        #map-box { 
-            height: 450px; 
-            border-radius: 20px; 
-            border: 3px solid var(--gold); 
-            overflow: hidden; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        /* ---- Стили для галереи стационара ---- */
+        .stationary-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Адаптивная сетка */
+            gap: 20px;
+            padding: 10px;
         }
+
+        .gallery-item {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(212,175,55,0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px; /* Фиксированная высота для всех фото */
+            object-fit: cover; /* О
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.05); /* Небольшое увеличение при наведении */
+        }
+        /* ---- КОНЕЦ СТИЛЕЙ ГАЛЕРЕИ ---- */
+
+        /* ---- Стили для карты (чистый вариант, без конфликтов) ---- */
+        .map-container {
+            position: relative; /* Для правильного позиционирования ссылок Яндекса */
+            width: 100%;
+            max-width: 900px; /* Максимальная ширина карты на больших экранах */
+            margin: 20px auto; /* Центрируем блок по горизонтали */
+            border: 3px solid var(--gold); /* Золотая рамка */
+            border-radius: 20px; /* Скругленные углы */
+            overflow: hidden; /* Обрезает содержимое, чтобы рамка была ровной */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Тень */
+            height: 445px; /* Фиксированная высота для области карты */
+        }
+
+        .map-container iframe {
+            display: block; /* Убираем лишние отступы у iframe */
+            width: 100%; /* Iframe занимает всю ширину родителя */
+            height: 100%; /* Iframe занимает всю высоту родителя */
+            border: none; /* Убираем стандартную рамку iframe */
+            z-index: 1; /* Если ссылки будут перекрываться, это может помочь */
+        }
+
+        /* Стили для маленьких ссылок-подписей Яндекса, которые расположены ПОВЕРХ карты */
+        .map-container a {
+            color: var(--gold) !important; /* Делаем цвет золотым, !important для перекрытия инлайн стилей Яндекса */
+            font-size: 13px !important; /* Чуть крупнее */
+            position: absolute;
+            left: 10px; /* Отступ слева от края контейнера */
+            padding: 2px 5px; /* Небольшой внутренний отступ для фона */
+            background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный фон для лучшей видимости */
+            border-radius: 3px;
+            z-index: 10; /* Убедимся, что они поверх iframe */
+            text-decoration: none; /* Убираем подчеркивание */
+            transition: background-color 0.3s ease;
+        }
+
+        .map-container a:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .map-container a:nth-of-type(1) { /* Первая ссылка: "Олимп" */
+            top: 10px; /* Отступ сверху от края контейнера */
+        }
+
+        .map-container a:nth-of-type(2) { /* Вторая ссылка: "Бизнес-центр в Набережных Челнах" */
+            top: 34px; /* Отступ сверху (10px + высота первой ссылки + немного отступа) */
+        }
+        /* ---- КОНЕЦ СТИЛЕЙ КАРТЫ ---- */
 
         /* КНОПКИ СВЯЗИ (Floats) */
         .floats { 
@@ -755,90 +484,6 @@
         .f-tg { background: #24A1DE; }
         .f-max { background: var(--max-color); }
         .f-call { background: var(--gold); animation: pulse-gold 2s infinite; }
-
-        /* ---- НОВАЯ СЕКЦИЯ ГАЛЕРЕИ СТАНЦИОНАРА ---- */
-        .stationary-gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Адаптивная сетка */
-            gap: 20px;
-            padding: 10px;
-        }
-
-        .gallery-item {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(212,175,55,0.3);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 250px; /* Фиксированная высота для всех фото */
-            object-fit: cover; /* Обрезает изображение, чтобы оно заполнило контейнер */
-            display: block;
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item img:hover {
-            transform: scale(1.05); /* Небольшое увеличение при наведении */
-        }
-        /* ---- КОНЕЦ НОВОЙ СЕКЦИИ ---- */
-        /* --- Стили для центрирования карты --- */
-.map-wrapper {
-    position: relative; /* Для правильного позиционирования ссылок внутри */
-    width: 100%;
-    max-width: 900px; /* Максимальная ширина карты. Можешь изменить */
-    margin: 20px auto; /* Центрируем блок по горизонтали */
-    border: 3px solid var(--gold); /* Золотая рамка */
-    border-radius: 20px; /* Скругленные углы */
-    overflow: hidden; /* Обрезает содержимое, чтобы рамка была ровной */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Тень */
-    height: 445px; /* Фиксированная высота для области карты */
-}
-
-.map-wrapper iframe {
-    display: block; /* Убираем лишние отступы */
-    width: 100%; /* Iframe занимает всю ширину родителя */
-    height: 100%; /* Iframe занимает всю высоту родителя */
-    border: none; /* Убираем стандартную рамку iframe */
-    z-index: 1; /* Если ссылки будут перекрываться, это может помочь */
-}
-
-/* Стили для маленьких ссылок-подписей Яндекса, которые расположены ПОВЕРХ карты */
-/* Если они тебе не нужны или они мешают, можешь удалить этот блок CSS и сами <a> теги в HTML */
-.map-wrapper a {
-    color: var(--gold) !important; /* Делаем цвет золотым, !important для перекрытия инлайн стилей Яндекса */
-    font-size: 13px !important; /* Чуть крупнее */
-    position: absolute;
-    left: 10px; /* Отступ слева от края контейнера */
-    padding: 2px 5px; /* Небольшой внутренний отступ для фона */
-    background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный фон для лучшей видимости */
-    border-radius: 3px;
-    z-index: 10; /* Убедимся, что они поверх iframe */
-    text-decoration: none; /* Убираем подчеркивание */
-    transition: background-color 0.3s ease;
-}
-
-.map-wrapper a:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-.map-wrapper a:nth-of-type(1) { /* Первая ссылка: "Олимп" */
-    top: 10px; /* Отступ сверху от края контейнера */
-}
-
-.map-wrapper a:nth-of-type(2) { /* Вторая ссылка: "Бизнес-центр в Набережных Челнах" */
-    top: 34px; /* Отступ сверху (10px + высота первой ссылки + немного отступа) */
-}
-/* --- Конец стилей для центрирования карты --- */
     </style>
 </head>
 <body>
@@ -853,13 +498,12 @@
             <ul>
                 <li><a href="#doctors">О нас</a></li>
                 <li><a href="#prices">Цены</a></li>
-                <!-- НОВАЯ ССЫЛКА НА ГАЛЕРЕЮ СТАНЦИОНАРА -->
+                <!-- ССЫЛКА НА ГАЛЕРЕЮ СТАНЦИОНАРА -->
                 <li><a href="#stationary-gallery" class="header-nav-link">Стационар</a></li> 
                 <li><a href="#lic">Лицензии</a></li>
                 <li><a href="#map-sec">Карта</a></li>
             </ul>
         </nav>
-        <!-- ОСТАВЛЯЕМ ОДНУ КНОПКУ ТЕЛЕФОНА, ОНА АДАПТИРУЕТСЯ ЧЕРЕЗ CSS -->
         <a href="tel:+79397305399" class="h-phone">+7 (939) 730-53-99</a>
     </div>
 </header>
@@ -886,7 +530,7 @@
                 </div>
                 <div class="doc-card">
                     <img src="https://prodoctorov.ru/media/photo/naberezhnye-chelny/doctorimage/799715/2215690-799715-halimov_square.jpg" class="doc-img">
-                    <div class="doc-info"><h3>Халимов Ренат Рамилевич\</h3><p>Врач психотерапевт-нарколог</p></div>
+                    <div class="doc-info"><h3>Халимов Ренат Рамилевич</h3><p>Врач психотерапевт-нарколог</p></div>
                 </div>
             </div>
         </div>
@@ -1017,8 +661,7 @@
                     <div class="p-row"><span class="p-name">Стационарный курс лечения Неврозов (10-14 дней)</span><span class="p-price">85.000 ₽</span></div>
                 </div>
             </div>
-
-        </div>
+</div>
     </section>
 
     <!-- НОВАЯ СЕКЦИЯ: ГАЛЕРЕЯ СТАНЦИОНАРА -->
@@ -1026,6 +669,8 @@
         <div class="glass-panel">
             <h2 class="section-title">Наш стационар</h2>
             <div class="stationary-gallery-grid">
+                <!-- Добавлена первая фотография, если она существует -->
+                <div class="gallery-item"><img src="1 (1).webp" alt="Фото стационара 1"></div>
                 <div class="gallery-item"><img src="1 (2).webp" alt="Фото стационара 2"></div>
                 <div class="gallery-item"><img src="1 (3).webp" alt="Фото стационара 3"></div>
                 <div class="gallery-item"><img src="1 (4).webp" alt="Фото стационара 4"></div>
@@ -1067,31 +712,21 @@
         </div>
     </section>
 
-<section id="map-sec">
+    <section id="map-sec">
         <div class="glass-panel">
             <h2 class="section-title">Наш адрес</h2>
             <p style="text-align:center; font-weight:900; color:var(--accent-text); margin-bottom:20px;">Автозаводский проспект, 22А (Бизнес-Центр)</p>
             
-            <!-- ИСПРАВЛЕННЫЙ БЛОК ДЛЯ КАРТЫ -->
-<!-- НОВЫЙ КОД ДЛЯ ЦЕНТРИРОВАНИЯ КАРТЫ (СОХРАНЯЕМ МЕТКУ) -->
             <div class="map-container">
                 <iframe src="https://yandex.ru/map-widget/v1/?from=mapframe&ll=52.428398%2C55.756771&mode=poi&poi%5Bpoint%5D=52.427751%2C55.756797&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D221352569028&z=17.-99" 
                         width="100%" 
                         height="445" 
                         frameborder="0" 
                         allowfullscreen="true"></iframe>
-                <!-- Эти ссылки - подписи Яндекса. Можно удалить, если не нужны. -->
-                <a href="https://yandex.ru/maps/org/olimp/221352569028/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Олимп</a>
-                <a href="https://yandex.ru/maps/236/naberezhnye-chelny/category/business_center/184107509/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:14px;">Бизнес-центр в Набережных Челнах</a>
-            </div>
-            <!-- КОНЕЦ НОВОГО КОДА -->
-                
-                <!-- Эти ссылки - это текстовые подписи Яндекса, которые отображаются поверх карты.
-                     Если они тебе не нужны, можешь их удалить. -->
+                <!-- Эти ссылки - подписи Яндекса. Можешь их удалить, если не нужны, но они стилизованы -->
                 <a href="https://yandex.ru/maps/org/olimp/221352569028/?utm_medium=mapframe&utm_source=maps">Олимп</a>
                 <a href="https://yandex.ru/maps/236/naberezhnye-chelny/category/business_center/184107509/?utm_medium=mapframe&utm_source=maps">Бизнес-центр в Набережных Челнах</a>
             </div>
-            <!-- КОНЕЦ ИСПРАВЛЕННОГО БЛОКА -->
             
         </div>
     </section>
@@ -1112,18 +747,6 @@
             header.parentElement.classList.toggle('active');
         });
     });
-    // Дополнительный скрипт для анимации header-nav-link при прокрутке
-    // (опционально, если хочешь, чтобы кнопка появлялась/меняла цвет)
-    // window.addEventListener('scroll', () => {
-    //     const headerNav = document.querySelector('.header-nav-link');
-    //     if (window.scrollY > 200) { // Когда прокручено на 200px
-    //         headerNav.style.opacity = '1';
-    //         headerNav.style.transform = 'scale(1)';
-    //     } else {
-    //         headerNav.style.opacity = '0';
-    //         headerNav.style.transform = 'scale(0.9)';
-    //     }
-    // });
 </script>
 
 </body>
