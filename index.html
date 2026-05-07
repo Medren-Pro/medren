@@ -19,7 +19,7 @@
         }
 
         @keyframes flow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        @keyframes pulse-gold { 0% { box-shadow: 0 0 0 0 rgba(212,175,55,0.7); } 70% { box-shadow: 0 0 0 20px rgba(212,175,55,0); } 100% { box-shadow: 0 0 0 0 rgba(212,175,55,0); } }
+        @keyframes pulse-gold { 0% { box-shadow: 0 0 0 0 rgba(212,175,55,0.7); } 70% { box-shadow: 0 0 0 12px rgba(212,175,55,0); } /* Чуть уменьшил радиус пульсации */ 100% { box-shadow: 0 0 0 0 rgba(212,175,55,0); } }
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -45,6 +45,7 @@
             z-index: 1000;
             border-bottom: 1px solid var(--gold);
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: padding 0.3s ease; /* Плавный переход при изменении размера шапки */
         }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 15px; }
@@ -82,51 +83,68 @@
         }
         .h-phone:hover { color: var(--white); }
 
-        /* Кнопка "Стационар" / "Галерея" */
+        /* Кнопка "Стационар" / "Галерея" с легким градиентом */
         .header-nav-link { 
             display: inline-block;
             margin-left: 15px;
             padding: 10px 20px;
-            background-color: rgba(255, 255, 255, 0.15);
+            /* Изменено: добавлен легкий градиент */
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
             color: var(--white);
             text-decoration: none;
             border-radius: 25px;
             font-weight: 700;
             font-size: 12px;
             letter-spacing: 0.5px;
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-            border: 1px solid var(--glass-border);
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+            /* Изменено: чуть более выраженная граница */
+            border: 1px solid rgba(255, 255, 255, 0.25);
         }
 
         .header-nav-link:hover {
             background-color: var(--accent-text);
             color: #1a1a1a;
             transform: translateY(-2px);
+            border-color: var(--accent-text); /* Граница тоже меняет цвет */
         }
         
         /* Адаптация шапки и кнопок мессенджеров для мобильных */
-        @media (max-width: 5px) { 
-            nav { display: none; }
+        @media (max-width: 768px) { 
+            header { /* Уменьшаем шапку на мобильных */
+                padding: 10px 0; /* Меньше отступ сверху/снизу */
+            }
+            nav { display: none; } /* Скрываем меню на мобильных для экономии места */
             .header-flex { justify-content: space-between; }
-            .logo-img { height: 15px; }
-            .logo-text { font-size: 5px; }
-            .logo-text span { font-size: 8px; }
-            .h-phone { font-size: 16px; margin-left: 10px; }
+            .logo-img { height: 38px; } /* Чуть меньше */
+            .logo-text { font-size: 17px; line-height: 1.1; } /* Чуть меньше */
+            .logo-text span { font-size: 8px; letter-spacing: 1px; } /* Чуть меньше */
+            .h-phone { font-size: 15px; margin-left: 10px; } /* Чуть меньше */
 
-            /* Стили для кнопок мессенджеров на мобильных */
+            .hero { /* Сдвигаем герой-секцию ниже, чтобы не наезжала на уменьшенную шапку */
+                padding: 100px 0 40px; 
+            }
+
+            /* Стили для плавающих кнопок мессенджеров на мобильных */
             .floats { 
-                bottom: 20px; right: 20px;
-                flex-direction: row;
-                gap: 10px;
-                width: fit-content; /* Ширина по содержимому */
-                flex-wrap: wrap; /* Разрешаем перенос на следующую строку, если кнопок много */
+                bottom: 15px; /* Меньше отступ снизу */
+                right: 15px; /* Меньше отступ справа */
+                gap: 8px; /* Меньше расстояние между кнопками */
+                flex-direction: row; /* На мобильных выстраиваем в ряд */
+                width: 100%; /* Занимаем всю ширину */
                 justify-content: flex-end; /* Выравниваем по правому краю */
+                padding: 0 15px; /* Отступы по бокам */
+                box-sizing: border-box; /* Учитываем padding в ширине */
             }
             .f-btn { 
-                width: 55px; height: 55px; font-size: 26px;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+                width: 45px; /* Уменьшаем размер */
+                height: 45px; 
+                font-size: 22px; /* Уменьшаем размер иконок */
+                box-shadow: 0 3px 10px rgba(0,0,0,0.4); /* Меньше тень */
             }
-            .f-btn:hover { transform: scale(1.05) rotate(0deg); } /* Убираем вращение на мобильных */
+            .f-btn:hover { 
+                transform: scale(1.05); /* Убрал вращение для более "серьезного" вида на мобильных */ 
+                box-shadow: 0 5px 12px rgba(0,0,0,0.5);
+            }
         }
 
         /* --- Стили для "заманивания" --- */
@@ -169,10 +187,12 @@
             border: 1px solid var(--glass-border); 
             text-align: center;
             transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Легкая тень для объема */
         }
         .trust-card:hover {
             transform: translateY(-8px);
             background-color: rgba(255, 255, 255, 0.18);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4); /* Чуть больше тень при ховере */
         }
         .trust-card i { 
             font-size: 36px;
@@ -189,7 +209,12 @@
             border-radius: 30px; 
             padding: 40px; 
             border: 1px solid var(--glass-border); 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5); /* Отличная тень */
+            transition: box-shadow 0.3s ease; /* Плавное изменение тени */
+        }
+        /* Усиление тени на glass-panel при возможном ховере или фокусе, если применимо */
+        .glass-panel:hover {
+            box-shadow: 0 25px 60px rgba(0,0,0,0.6);
         }
         .section-title { 
             text-align: center; 
@@ -273,7 +298,7 @@
 
         .p-row { 
             padding: 20px; 
-            border-bottom: 1px solidrgba(255,255,255,0.05); 
+            border-bottom: 1px solid rgba(255,255,255,0.05); /* Исправлена опечатка в rgba() */
             display: flex; 
             flex-wrap: wrap; 
             gap: 10px; 
@@ -395,7 +420,7 @@
         .gallery-item img {
             width: 100%;
             height: 250px; /* Фиксированная высота для всех фото */
-            object-fit: cover; /* О
+            object-fit: cover; 
             display: block;
             transition: transform 0.3s ease;
         }
@@ -456,29 +481,29 @@
         /* КНОПКИ СВЯЗИ (Floats) */
         .floats { 
             position: fixed; 
-            bottom: 30px; 
-            right: 30px; 
+            bottom: 20px; /* Немного меньше отступ */
+            right: 20px; /* Немного меньше отступ */
             z-index: 2000; 
             display: flex; 
             flex-direction: column; 
-            gap: 15px; 
+            gap: 10px; /* Немного меньше расстояние */
         }
         .f-btn { 
-            width: 75px; 
-            height: 75px; 
+            width: 60px; /* Уменьшаем размер для десктопа (было 75px) */
+            height: 60px; /* Уменьшаем размер для десктопа (было 75px) */
             border-radius: 50%; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             color: white; 
-            font-size: 38px; 
+            font-size: 30px; /* Уменьшаем размер иконки (было 38px) */
             text-decoration: none; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5); 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5); /* Уменьшаем тень */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .f-btn:hover { 
-            transform: scale(1.1) rotate(5deg); 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            transform: scale(1.1); /* Убрал вращение для более "серьезного" вида */ 
+            box-shadow: 0 12px 30px rgba(0,0,0,0.6); /* Немного меньше тень при ховере */
         }
         .f-wa { background: #25D366; }
         .f-tg { background: #24A1DE; }
@@ -587,8 +612,7 @@
                         <span class="p-time">21 день</span>
                         <span class="p-price">180.000 ₽</span>
                         <div class="p-desc">Полная диагностика + Нарколог, Невролог, Терапевт + консультация Д.М.Н. Профессора (1) + Психолог (8).</div>
-                    </div>
-                    <div class="p-row">
+                    </div><div class="p-row">
                         <span class="p-name">Курс стационарного лечения «Максимальный»</span>
                         <span class="p-time">28 дней</span>
                         <span class="p-price">240.000 ₽</span>
@@ -632,7 +656,7 @@
                     <div class="p-row">
                         <span class="p-name">Курс амбулаторного лечения «Алкомет»</span>
                         <span class="p-price">70.000 ₽</span>
-                        <div class="p-desc">Гипнотерапия (10), занятия с психологом (10), курс АВС-терапии (20), кодирование по Довженко.</div>
+                        <div class="p-desc">Гипнотерапия (10), занятия с психологом (10), курс АВС-т ерапии (20), кодирование по Довженко.</div>
                     </div>
                 </div>
             </div>
@@ -724,8 +748,8 @@
                         frameborder="0" 
                         allowfullscreen="true"></iframe>
                 <!-- Эти ссылки - подписи Яндекса. Можешь их удалить, если не нужны, но они стилизованы -->
-                <a href="https://yandex.ru/maps/org/olimp/221352569028/?utm_medium=mapframe&utm_source=maps">Олимп</a>
-                <a href="https://yandex.ru/maps/236/naberezhnye-chelny/category/business_center/184107509/?utm_medium=mapframe&utm_source=maps">Бизнес-центр в Набережных Челнах</a>
+                <a href="https://yandex.ru/maps/org/olimp/221352569028/?utm_medium=mapframe&utm_source=maps" target="_blank" rel="noopener noreferrer">Олимп</a>
+                <a href="https://yandex.ru/maps/236/naberezhnye-chelny/category/business_center/184107509/?utm_medium=mapframe&utm_source=maps" target="_blank" rel="noopener noreferrer">Бизнес-центр в Набережных Челнах</a>
             </div>
             
         </div>
@@ -734,9 +758,9 @@
 </div>
 
 <div class="floats">
-    <a href="https://max.ru" class="f-btn f-max" title="MAX"><i class="fas fa-comment-medical"></i></a>
-    <a href="https://wa.me/79397305399" class="f-btn f-wa"><i class="fab fa-whatsapp"></i></a>
-    <a href="https://t.me/Y198130" class="f-btn f-tg"><i class="fab fa-telegram-plane"></i></a>
+    <a href="https://max.ru" class="f-btn f-max" title="MAX" target="_blank" rel="noopener noreferrer"><i class="fas fa-comment-medical"></i></a>
+    <a href="https://wa.me/79397305399" class="f-btn f-wa" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://t.me/medren16rus" class="f-btn f-tg" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram-plane"></i></a>
     <a href="tel:+79397305399" class="f-btn f-call"><i class="fas fa-phone"></i></a>
 </div>
 
