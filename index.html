@@ -3,512 +3,214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>МЕДРЕН | Наркологический центр в Набережных Челнах</title>
+    <title>МЕДРЕН | Центр современной наркологии</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --gold: #d4af37;
+            --gold-bright: #ffd700;
             --white: #ffffff;
-            --glass: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --max-color: linear-gradient(135deg, #6e8eff, #a777e3); /* Более яркий синий */
-            --header-bg: rgba(0, 0, 0, 0.7);
-            --text-color: white;
-            --accent-text: var(--gold);
+            --bg-dark: #0a1a16;
+            --glass: rgba(255, 255, 255, 0.07);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --accent-gradient: linear-gradient(135deg, #d4af37, #b8860b);
         }
 
-        @keyframes flow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        @keyframes pulse-gold { 0% { box-shadow: 0 0 0 0 rgba(212,175,55,0.7); } 70% { box-shadow: 0 0 0 12px rgba(212,175,55,0); } /* Чуть уменьшил радиус пульсации */ 100% { box-shadow: 0 0 0 0 rgba(212,175,55,0); } }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; }
-        
-        body { 
-            background: linear-gradient(-45deg, #0a241d, #1b4d3e, #8e7423, #1b4d3e);
+
+        body {
+            background: linear-gradient(-45deg, #051410, #0a241d, #1a1405, #051410);
             background-size: 400% 400%;
-            animation: flow 15s ease infinite;
-            color: var(--text-color);
-            line-height: 1.5;
+            animation: gradientBG 15s ease infinite;
+            color: var(--white);
+            overflow-x: hidden;
         }
 
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
         header {
-            background: var(--header-bg);
-            backdrop-filter: blur(15px);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
             padding: 15px 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid var(--gold);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            transition: padding 0.3s ease; /* Плавный переход при изменении размера шапки */
         }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 15px; }
         .header-flex { display: flex; align-items: center; justify-content: space-between; }
 
-        .logo-block { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-        .logo-img { height: 50px; border-radius: 50%; border: 2px solid var(--gold); background: white; transition: transform 0.3s ease; }
+        .logo-block { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-img { height: 55px; border-radius: 50%; border: 2px solid var(--gold); background: #fff; padding: 2px; }
+        .logo-text { color: var(--gold); font-size: 24px; font-weight: 900; line-height: 0.9; }
+        .logo-text span { font-size: 11px; color: #fff; letter-spacing: 3px; text-transform: uppercase; }
 
+        nav ul { display: flex; list-style: none; gap: 20px; align-items: center; }
+        nav a { color: #fff; text-decoration: none; font-size: 12px; font-weight: 700; text-transform: uppercase; transition: 0.3s; }
+        nav a:hover { color: var(--gold); }
 
-
-.logo-text { color: var(--accent-text); font-size: 22px; font-weight: 900; line-height: 0.9; }
-        .logo-text span { font-size: 10px; color: var(--white); letter-spacing: 2px; }
-
-        nav ul { 
-            display: flex; 
-            list-style: none; 
-            gap: 25px;
-        }
-        nav a { 
-            color: var(--white); 
-            text-decoration: none; 
-            font-size: 11px; 
-            font-weight: 700; 
-            text-transform: uppercase; 
-            letter-spacing: 1px; 
-            transition: color 0.3s ease;
-        }
-        nav a:hover { color: var(--accent-text); }
-        .h-phone { 
-            color: var(--accent-text); 
-            font-size: 18px; 
-            font-weight: 900; 
-            text-decoration: none; 
-            transition: color 0.3s ease;
-        }
-        .h-phone:hover { color: var(--white); }
-
-        /* Кнопка "Стационар" / "Галерея" с легким градиентом */
-        .header-nav-link { 
-            display: inline-block;
-            margin-left: 15px;
+        .btn-stat {
+            background: var(--accent-gradient);
             padding: 10px 20px;
-            /* Изменено: добавлен легкий градиент */
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
-            color: var(--white);
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: 700;
-            font-size: 12px;
-            letter-spacing: 0.5px;
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
-            /* Изменено: чуть более выраженная граница */
-            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 30px;
+            color: #000 !important;
+            font-weight: 800 !important;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+        /* Уменьшенная версия для мобильных */
+        @media (max-width: 768px) {
+            .btn-stat { padding: 8px 12px !important; font-size: 11px !important; border-radius: 22px; }
         }
 
-        .header-nav-link:hover {
-            background-color: var(--accent-text);
-            color: #1a1a1a;
-            transform: translateY(-2px);
-            border-color: var(--accent-text); /* Граница тоже меняет цвет */
-        }
-        
-        /* Адаптация шапки и кнопок мессенджеров для мобильных */
-        @media (max-width: 768px) { 
-            header { /* Уменьшаем шапку на мобильных */
-                padding: 10px 0; /* Меньше отступ сверху/снизу */
-            }
-            nav { display: none; } /* Скрываем меню на мобильных для экономии места */
-            .header-flex { justify-content: space-between; }
-            .logo-img { height: 38px; } /* Чуть меньше */
-            .logo-text { font-size: 17px; line-height: 1.1; } /* Чуть меньше */
-            .logo-text span { font-size: 8px; letter-spacing: 1px; } /* Чуть меньше */
-            .h-phone { font-size: 15px; margin-left: 10px; } /* Чуть меньше */
+        .h-phone { color: var(--gold); font-size: 18px; font-weight: 900; text-decoration: none; }
 
-            .hero { /* Сдвигаем герой-секцию ниже, чтобы не наезжала на уменьшенную шапку */
-                padding: 100px 0 40px; 
-            }
+        .hero { padding: 180px 0 80px; text-align: center; }
+        .hero h1 { font-size: clamp(32px, 6vw, 64px); font-weight: 900; text-transform: uppercase; margin-bottom: 15px; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: clamp(18px, 2vw, 24px); color: rgba(255,255,255,0.8); margin-bottom: 50px; }
 
-            /* Стили для плавающих кнопок мессенджеров на мобильных */
-            .floats { 
-                bottom: 15px; /* Меньше отступ снизу */
-                right: 15px; /* Меньше отступ справа */
-                gap: 8px; /* Меньше расстояние между кнопками */
-                flex-direction: row; /* На мобильных выстраиваем в ряд */
-                width: 100%; /* Занимаем всю ширину */
-                justify-content: flex-end; /* Выравниваем по правому краю */
-                padding: 0 15px; /* Отступы по бокам */
-                box-sizing: border-box; /* Учитываем padding в ширине */
-            }
-            .f-btn { 
-                width: 45px; /* Уменьшаем размер */
-                height: 45px; 
-                font-size: 22px; /* Уменьшаем размер иконок */
-                box-shadow: 0 3px 10px rgba(0,0,0,0.4); /* Меньше тень */
-            }
-            .f-btn:hover { 
-                transform: scale(1.05); /* Убрал вращение для более "серьезного" вида на мобильных */ 
-                box-shadow: 0 5px 12px rgba(0,0,0,0.5);
-            }
+        .trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+        .trust-card { 
+            background: var(--glass); 
+            padding: 30px; 
+            border-radius: 20px; 
+            border: 1px solid var(--glass-border);
+            transition: 0.4s;
         }
+        .trust-card:hover { transform: translateY(-10px); background: rgba(255,255,255,0.12); border-color: var(--gold); }
+        .trust-card i { font-size: 40px; color: var(--gold); margin-bottom: 15px; }
+        .trust-card h4 { font-size: 20px; margin-bottom: 10px; color: var(--gold); }
 
-        /* --- Стили для "заманивания" --- */
-        .hero { 
-            padding: 140px 0 60px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero h1 { 
-            font-size: clamp(28px, 5vw, 50px);
-            font-weight: 900; 
-            text-transform: uppercase; 
-            margin-bottom: 10px; 
-            color: var(--accent-text); 
-            animation: fadeInUp 1s ease-out forwards;
-            opacity: 0;
-        }
-        .hero p { 
-            font-size: clamp(16px, 2vw, 22px);
-            margin-bottom: 40px;
-            color: rgba(255, 255, 255, 0.8);
-            animation: fadeInUp 1s ease-out forwards;
-            animation-delay: 0.3s;
-            opacity: 0;
-        }
-        .trust-box { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-            gap: 30px;
-            margin-top: 30px; 
-            opacity: 0;
-            animation: fadeInUp 1s ease-out forwards;
-            animation-delay: 0.6s;
-        }
-        .trust-card {background: var(--glass); 
-            padding: 25px;
-            border-radius: 15px; 
-            border: 1px solid var(--glass-border); 
-            text-align: center;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Легкая тень для объема */
-        }
-        .trust-card:hover {
-            transform: translateY(-8px);
-            background-color: rgba(255, 255, 255, 0.18);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4); /* Чуть больше тень при ховере */
-        }
-        .trust-card i { 
-            font-size: 36px;
-            color: var(--accent-text); 
-            margin-bottom: 12px;
-        }
-        .trust-card h4 { font-size: 1.2em; margin-bottom: 8px; color: var(--white); }
-        .trust-card p { font-size: 0.9em; color: rgba(255, 255, 255, 0.7); }
-
-        section { padding: 70px 0; }
+        section { padding: 80px 0; }
         .glass-panel { 
             background: var(--glass); 
-            backdrop-filter: blur(20px); 
+            backdrop-filter: blur(15px); 
             border-radius: 30px; 
-            padding: 40px; 
-            border: 1px solid var(--glass-border); 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5); /* Отличная тень */
-            transition: box-shadow 0.3s ease; /* Плавное изменение тени */
+            padding: 50px 40px; 
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
         }
-        /* Усиление тени на glass-panel при возможном ховере или фокусе, если применимо */
-        .glass-panel:hover {
-            box-shadow: 0 25px 60px rgba(0,0,0,0.6);
-        }
-        .section-title { 
-            text-align: center; 
-            margin-bottom: 40px; 
-            font-size: clamp(28px, 4vw, 38px);
-            color: var(--accent-text); 
-            text-transform: uppercase; 
-            font-weight: 900; 
-            position: relative;
-            padding-bottom: 15px;
-        }
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background-color: var(--accent-text);
-            border-radius: 2px;
-        }
+        .section-title { text-align: center; font-size: clamp(28px, 4vw, 42px); font-weight: 900; color: var(--gold); text-transform: uppercase; margin-bottom: 50px; }
 
-        .doc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .doc-card { 
-            background: rgba(0,0,0,0.3); 
-            border-radius: 20px; 
-            overflow: hidden; 
-            border: 1px solid var(--glass-border); 
-            text-align: center; 
-            transition: 0.3s; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-        .doc-card:hover { 
-            border-color: var(--gold); 
-            transform: translateY(-5px); 
-            box-shadow: 0 15px 40px rgba(212,175,55,0.3);
-        }
-        .doc-img { 
-            width: 100%; 
-            height: 380px; 
-            object-fit: cover;
-            display: block;
-        }
-        .doc-info { padding: 20px; }
-        .doc-info h3 { color: var(--white); font-size: 20px; margin-bottom: 5px; }
-        .doc-info p { color: rgba(255,255,255,0.7); font-size: 14px;}
+        .doc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .doc-card { background: rgba(0,0,0,0.4); border-radius: 25px; overflow: hidden; border: 1px solid var(--glass-border); transition: 0.3s; }
+        .doc-card:hover { border-color: var(--gold); transform: scale(1.02); }
+        .doc-img { width: 100%; height: 400px; object-fit: cover; }
+        .doc-info { padding: 25px; text-align: center; }
+        .doc-info h3 { font-size: 22px; color: var(--gold); margin-bottom: 8px; }
+        .doc-info p { font-size: 16px; color: rgba(255,255,255,0.7); }
 
-        /* ПРАЙС КАТЕГОРИИ */
-        .price-cat { 
-            margin-bottom: 15px; 
-            border-radius: 15px; 
-            overflow: hidden; 
-            border: 1px solid var(--glass-border); 
-            background: rgba(0,0,0,0.2); 
-            transition: box-shadow 0.3s ease;
-        }
-        .price-cat:hover { box-shadow: 0 0 20px rgba(212,175,55,0.2); }
-
+        .price-cat { margin-bottom: 15px; border-radius: 15px; overflow: hidden; border: 1px solid var(--glass-border); }
         .price-head { 
-            padding: 20px; 
-            cursor: pointer; 
+            padding: 20px 30px; 
+            background: rgba(212, 175, 55, 0.1); 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            font-weight: 900; 
-            text-transform: uppercase; 
-            color: var(--accent-text); 
-            background: rgba(212,175,55,0.1); 
-            transition: background-color 0.3s ease;
+            cursor: pointer; 
+            font-weight: 800; 
+            text-transform: uppercase;
+            color: var(--gold);
         }
-        .price-head:hover { background-color: rgba(212,175,55,0.2); }
         .price-head i { transition: 0.3s; }
-        .price-body { 
-            display: none;
-            padding: 10px 0; 
-            background: rgba(0,0,0,0.3); 
-        }
+        .price-body { display: none; background: rgba(0,0,0,0.2); }
         .price-cat.active .price-body { display: block; }
+        .price-cat.active .price-head { background: rgba(212, 175, 55, 0.2); }
         .price-cat.active .price-head i { transform: rotate(180deg); }
 
-        .p-row { 
-            padding: 20px; 
-            border-bottom: 1px solid rgba(255,255,255,0.05); /* Исправлена опечатка в rgba() */
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 10px; 
-            align-items: center; 
-        }
-        .p-row:last-child { border-bottom: none; }
-        .p-name { 
-            font-weight: 700; 
-            font-size: 17px; 
-            color: var(--white); 
-            flex-basis: 100%; 
-        }
-        .p-time { 
-            font-size: 12px; 
-            color: var(--accent-text); 
-            font-weight: 800; 
-            text-transform: uppercase; 
-            margin-top: 5px; 
-            flex-basis: 100%; 
-        }
-        .p-price { 
-            font-weight: 900; 
-            color: #4ade80; 
-            font-size: 20px; 
-            margin-left: auto; 
-            flex-shrink: 0; 
-        }
-        
-        /* ИЗМЕНЕННЫЙ СТИЛЬ ДЛЯ .p-desc */
-        .p-desc { 
-            font-size: 13px; 
-            color: #E0E0E0; /* Светло-серый, не слишком темный */
-            margin-top: 10px; 
-            padding: 10px 15px;
-            border-left: 4px solid var(--gold); /* Золотая полоска слева */
-            background: rgba(255, 255, 255, 0.08); /* Легкий фон */
-            border-radius: 4px; 
-            flex-basis: 100%; 
-            font-style: italic; /* Курсив */
-            box-shadow: inset 5px 0 0 -2px rgba(212,175,55,0.3); /* Внутренняя тень */
+        .p-row { padding: 20px 30px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; }
+        .p-name { font-weight:700; font-size: 18px; flex: 1; min-width: 250px; }
+        .p-price { font-weight: 900; color: #4ade80; font-size: 20px; }
+        .p-desc { width: 100%; font-size: 13px; color: #aaa; margin-top: 10px; font-style: italic; }
+
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+        .gallery-item { height: 200px; border-radius: 15px; overflow: hidden; border: 1px solid var(--glass-border); cursor: pointer; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .gallery-item:hover img { transform: scale(1.1); }
+
+        .blanks-flex { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
+        .blank { background: #fff; color: #111; padding: 40px; border-radius: 5px; width: 100%; max-width: 500px; position: relative; font-family: serif; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .blank h4 { border-bottom: 2px solid #111; padding-bottom: 10px; margin-bottom: 20px; text-align: center; }
+        .stamp { position: absolute; bottom: 30px; right: 30px; border: 3px double #2c3e8c; color: #2c3e8c; width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 10px; font-weight: bold; transform: rotate(-15deg); opacity: 0.5; }
+
+        .map-box { border: 2px solid var(--gold); border-radius: 25px; overflow: hidden; height: 450px; }
+
+        .floats {
+            position: fixed;
+            bottom: 18px;
+            right: 18px;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
-        /* ОФИЦИАЛЬНЫЕ БЛАНКИ */
-        .blanks-grid { 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 30px; 
-            justify-content: center; 
+        .f-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 18px;
+            text-decoration: none;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+            padding: 0;
         }
-        .official-blank { 
-            background: #fff; 
-            color: #333; 
-            width: 100%; 
-            max-width: 500px; 
-            padding: 40px; 
-            border-radius: 8px; 
-            position: relative; 
-            font-family: 'Times New Roman', serif; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5); 
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(0,0,0,0.1);
+        .f-btn:hover {
+            transform: scale(1.06);
+            box-shadow: 0 10px 24px rgba(0,0,0,0.55);
         }
-        .official-blank:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px rgba(212,175,55,0.2);
-        }
-        .blank-header { 
-            text-align: center; 
-            border-bottom: 2px solid #333; 
-            padding-bottom: 10px; 
-            margin-bottom: 20px; 
-            font-size: 16px;
-        }
-        .blank-header h4 { margin: 0; }
-
-        .stamp { 
-            border: 4px double #2c3e8c; 
-            color: #2c3e8c; 
-            width: 110px; 
-            height: 110px; 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            text-align: center; 
-            font-size: 9px; 
-            font-weight: bold; 
-            position: absolute; 
-            bottom: 30px; 
-            right: 30px; 
-            transform: rotate(-15deg); 
-            opacity: 0.4; 
-            pointer-events: none; 
-        }
-
-        /* ---- Стили для галереи стационара ---- */
-        .stationary-gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Адаптивная сетка */
-            gap: 20px;
-            padding: 10px;
-        }
-
-        .gallery-item {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(212,175,55,0.3);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 250px; /* Фиксированная высота для всех фото */
-            object-fit: cover; 
-            display: block;
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item img:hover {
-            transform: scale(1.05); /* Небольшое увеличение при наведении */
-        }
-        /* ---- КОНЕЦ СТИЛЕЙ ГАЛЕРЕИ ---- */
-
-        /* ---- Стили для карты (чистый вариант, без конфликтов) ---- */
-        .map-container {
-            position: relative; /* Для правильного позиционирования ссылок Яндекса */
-            width: 100%;
-            max-width: 900px; /* Максимальная ширина карты на больших экранах */
-            margin: 20px auto; /* Центрируем блок по горизонтали */
-            border: 3px solid var(--gold); /* Золотая рамка */
-            border-radius: 20px; /* Скругленные углы */
-            overflow: hidden; /* Обрезает содержимое, чтобы рамка была ровной */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Тень */
-            height: 445px; /* Фиксированная высота для области карты */
-        }
-
-        .map-container iframe {
-            display: block; /* Убираем лишние отступы у iframe */
-            width: 100%; /* Iframe занимает всю ширину родителя */
-            height: 100%; /* Iframe занимает всю высоту родителя */
-            border: none; /* Убираем стандартную рамку iframe */
-            z-index: 1; /* Если ссылки будут перекрываться, это может помочь */
-        }
-
-        /* Стили для маленьких ссылок-подписей Яндекса, которые расположены ПОВЕРХ карты */
-        .map-container a {
-            color: var(--gold) !important; /* Делаем цвет золотым, !important для перекрытия инлайн стилей Яндекса */
-            font-size: 13px !important; /* Чуть крупнее */
-            position: absolute;
-            left: 10px; /* Отступ слева от края контейнера */
-            padding: 2px 5px; /* Небольшой внутренний отступ для фона */
-            background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный фон для лучшей видимости */
-            border-radius: 3px;
-            z-index: 10; /* Убедимся, что они поверх iframe */
-            text-decoration: none; /* Убираем подчеркивание */
-            transition: background-color 0.3s ease;
-        }
-
-        .map-container a:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        .map-container a:nth-of-type(1) { /* Первая ссылка: "Олимп" */
-            top: 10px; /* Отступ сверху от края контейнера */
-        }
-
-        .map-container a:nth-of-type(2) { /* Вторая ссылка: "Бизнес-центр в Набережных Челнах" */
-            top: 34px; /* Отступ сверху (10px + высота первой ссылки + немного отступа) */
-        }
-        /* ---- КОНЕЦ СТИЛЕЙ КАРТЫ ---- */
-
-        /* КНОПКИ СВЯЗИ (Floats) */
-        .floats { 
-            position: fixed; 
-            bottom: 20px; /* Немного меньше отступ */
-            right: 20px; /* Немного меньше отступ */
-            z-index: 2000; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 10px; /* Немного меньше расстояние */
-        }
-        .f-btn { 
-            width: 60px; /* Уменьшаем размер для десктопа (было 75px) */
-            height: 60px; /* Уменьшаем размер для десктопа (было 75px) */
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            color: white; 
-            font-size: 30px; /* Уменьшаем размер иконки (было 38px) */
-            text-decoration: none; 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.5); /* Уменьшаем тень */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .f-btn:hover { 
-            transform: scale(1.1); /* Убрал вращение для более "серьезного" вида */ 
-            box-shadow: 0 12px 30px rgba(0,0,0,0.6); /* Немного меньше тень при ховере */
-        }
+        .f-btn i { line-height: 1; }
         .f-wa { background: #25D366; }
         .f-tg { background: #24A1DE; }
-        .f-max { background: var(--max-color); }
-        .f-call { background: var(--gold); animation: pulse-gold 2s infinite; }
+        .f-max { background: linear-gradient(135deg,#6e8eff,#a777e3); } /* Пример градиента */
+        .f-call { background: #d4af37; }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 10px 0; }
+            nav ul { display: none; } /* Упростим для мобилки, оставим только лого и телефон */
+            .logo-text { font-size: 18px; }
+            .hero { padding-top: 140px; padding-bottom: 50px; }
+            .hero h1 { font-size: clamp(28px, 5vw, 48px); }
+            .hero p { font-size: clamp(16px, 2vw, 20px); margin-bottom: 30px; }
+            .trust-grid { gap: 15px; }
+            .trust-card { padding: 20px; }
+            .trust-card i { font-size: 30px; }
+            .trust-card h4 { font-size: 17px; }
+            section { padding: 50px 0; }
+            .glass-panel { padding: 30px 20px; }
+            .section-title { font-size: 26px; margin-bottom: 30px; }
+            .doc-grid { gap: 20px; }
+            .doc-img { height: 300px; }
+            .p-row { padding: 15px; }
+            .p-name { font-size: 15px; flex-basis: 100%; }
+            .p-price { font-size: 17px; margin-top: 5px; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .gallery-item { height: 150px; }
+            .blank { padding: 25px; max-width: 320px; }
+            .stamp { width: 80px; height: 80px; font-size: 9px; bottom: 15px; right: 15px; }
+            .map-box { height: 300px; }
+            .floats { bottom: 12px; right: 12px; gap: 8px; }
+            .f-btn { width: 36px; height: 36px; font-size: 16px; }
+        }
     </style>
 </head>
 <body>
@@ -521,12 +223,11 @@
         </a>
         <nav>
             <ul>
-                <li><a href="#doctors">О нас</a></li>
-                <li><a href="#prices">Цены</a></li>
-                <!-- ССЫЛКА НА ГАЛЕРЕЮ СТАНЦИОНАРА -->
-                <li><a href="#stationary-gallery" class="header-nav-link">Стационар</a></li> 
-                <li><a href="#lic">Лицензии</a></li>
-                <li><a href="#map-sec">Карта</a></li>
+                <li><a href="#prices">Услуги</a></li>
+                <li><a href="#doctors">Врачи</a></li>
+                <li><a href="#stationary">Стационар</a></li>
+                <li><a href="#stationary" class="btn-stat">Условия</a></li>
+                <li><a href="#map-sec">Контакты</a></li>
             </ul>
         </nav>
         <a href="tel:+79397305399" class="h-phone">+7 (939) 730-53-99</a>
@@ -534,45 +235,39 @@
 </header>
 
 <div class="hero container">
-    <h1 class="hero-title-animated">Центр Современной Наркологии</h1>
-    <p class="hero-subtitle-animated">Анонимное лечение алкоголизма и наркомании в Набережных Челнах</p>
-    <div class="trust-box trust-box-animated">
-        <div class="trust-card"><i class="fas fa-lock"></i><h4>Анонимность</h4><p>Никаких баз и учетов</p></div>
-        <div class="trust-card"><i class="fas fa-ambulance"></i><h4>Срочность</h4><p>Выезд за 30 минут</p></div>
-        <div class="trust-card"><i class="fas fa-heartbeat"></i><h4>Результат</h4><p>Помощь с первого дня</p></div>
+    <h1>Возвращаем к жизни</h1>
+    <p>Анонимная наркологическая помощь 24/7 в Набережных Челнах</p>
+    <div class="trust-grid">
+        <div class="trust-card"><i class="fas fa-user-shield"></i><h4>100% Анонимно</h4><p>Не ставим на учет, данные не передаем</p></div>
+        <div class="trust-card"><i class="fas fa-bolt"></i><h4>Быстрый выезд</h4><p>Бригада будет у вас через 30-40 минут</p></div>
+        <div class="trust-card"><i class="fas fa-medal"></i><h4>Опытные врачи</h4><p>Стаж специалистов более 15 лет</p></div>
     </div>
 </div>
 
 <div class="container">
     
-    <section id="doctors">
-        <div class="glass-panel">
-            <h2 class="section-title">Наши врачи</h2>
-            <div class="doc-grid">
-                <div class="doc-card">
-                    <img src="https://prodoctorov.ru/media/photo/naberezhnye-chelny/doctorimage/112755/206464-112755-pichugin_square.jpg" class="doc-img">
-                    <div class="doc-info"><h3>Пичугин Олег Леонидович</h3><p>Врач анестезиолог-реаниматолог</p></div>
-                </div>
-                <div class="doc-card">
-                    <img src="https://prodoctorov.ru/media/photo/naberezhnye-chelny/doctorimage/799715/2215690-799715-halimov_square.jpg" class="doc-img">
-                    <div class="doc-info"><h3>Халимов Ренат Рамилевич</h3><p>Врач психотерапевт-нарколог</p></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section id="prices">
         <div class="glass-panel">
-            <h2 class="section-title">Прайс-лист услуг (Полный)</h2>
+            <h2 class="section-title">Стоимость услуг</h2>
 
             <!-- 1. НАРКОЛОГИЯ -->
             <div class="price-cat">
-                <div class="price-head">1. Наркология <i class="fas fa-chevron-down"></i></div>
+                <div class="price-head">Помощь на дому и стационар <i class="fas fa-chevron-down"></i></div>
                 <div class="price-body">
                     <div class="p-row">
-                        <span class="p-name">Выведение из запоя на дому (выезд)</span>
-                        <span class="p-time">до 18:00 / после 18:00</span>
-                        <span class="p-price">от 5.000 / от 6.000 ₽</span>
+                        <div class="p-name">Выведение из запоя (выезд)</div>
+                        <div class="p-price">от 5.000 ₽</div>
+                        <div class="p-desc">Полное очищение организма, капельница, седативные препараты.</div>
+                    </div>
+                    <div class="p-row">
+                        <div class="p-name">Сутки в стационаре (Стандарт)</div>
+                        <div class="p-price">7.000 ₽</div>
+                        <div class="p-desc">4-х разовое питание, круглосуточное наблюдение, медикаменты.</div>
+                    </div>
+                    <div class="p-row">
+                        <div class="p-name">Сутки в стационаре (VIP)</div>
+                        <div class="p-price">15.000 ₽</div>
+                        <div class="p-desc">Индивидуальная палата, расширенный комплекс процедур.</div>
                     </div>
                     <div class="p-row">
                         <span class="p-name">Лечение стационарно (Стандарт)</span>
@@ -583,7 +278,7 @@
                         <span class="p-name">Лечение стационарно (Палата повыш. комфорта)</span>
                         <span class="p-time">1 койко-день</span>
                         <span class="p-price">15.000 ₽</span>
-                        <div class="p-desc">Включает: капельницы, таблетки, инъекции, питание, работа с психологом.</div>
+                        <div class="p-desc">Включает: капельницы, таблетки, инъекции, питание,работа с психологом.</div>
                     </div>
                     <div class="p-row">
                         <span class="p-name">Лечение Амбулаторно «Лайт» / «Базовая»</span>
@@ -612,7 +307,8 @@
                         <span class="p-time">21 день</span>
                         <span class="p-price">180.000 ₽</span>
                         <div class="p-desc">Полная диагностика + Нарколог, Невролог, Терапевт + консультация Д.М.Н. Профессора (1) + Психолог (8).</div>
-                    </div><div class="p-row">
+                    </div>
+                    <div class="p-row">
                         <span class="p-name">Курс стационарного лечения «Максимальный»</span>
                         <span class="p-time">28 дней</span>
                         <span class="p-price">240.000 ₽</span>
@@ -626,7 +322,7 @@
 
             <!-- 2. КОНСУЛЬТАЦИИ -->
             <div class="price-cat">
-                <div class="price-head">2. Консультация специалиста <i class="fas fa-chevron-down"></i></div>
+                <div class="price-head">Консультации специалистов <i class="fas fa-chevron-down"></i></div>
                 <div class="price-body">
                     <div class="p-row"><span class="p-name">Прием психолога первичный / повторный (50 мин)</span><span class="p-price">Бесплатно / 2.500 ₽</span></div>
                     <div class="p-row"><span class="p-name">Прием психотерапевта перв. / повт. (50 мин)</span><span class="p-price">Бесплатно / 4.000 ₽</span></div>
@@ -640,7 +336,7 @@
 
             <!-- 3. БИОМАТЕРИАЛ -->
             <div class="price-cat">
-                <div class="price-head">3. Взятие биоматериала <i class="fas fa-chevron-down"></i></div>
+                <div class="price-head">Взятие биоматериала <i class="fas fa-chevron-down"></i></div>
                 <div class="price-body">
                     <div class="p-row"><span class="p-name">Взятие крови из периферической вены</span><span class="p-price">500 ₽</span></div>
                     <div class="p-row"><span class="p-name">Сбор мочи для лабораторных исследований</span><span class="p-price">300 ₽</span></div>
@@ -649,21 +345,21 @@
 
             <!-- 4. АЛКОГОЛИЗМ -->
             <div class="price-cat">
-                <div class="price-head">4. Алкоголизм <i class="fas fa-chevron-down"></i></div>
+                <div class="price-head">Лечение алкоголизма <i class="fas fa-chevron-down"></i></div>
                 <div class="price-body">
                     <div class="p-row"><span class="p-name">Кодирование по методу Довженко</span><span class="p-price">15.000 ₽</span></div>
                     <div class="p-row"><span class="p-name">Кодирование медикаментозное (6 / 12 мес)</span><span class="p-price">6.000 / 10.000 ₽</span></div>
                     <div class="p-row">
                         <span class="p-name">Курс амбулаторного лечения «Алкомет»</span>
                         <span class="p-price">70.000 ₽</span>
-                        <div class="p-desc">Гипнотерапия (10), занятия с психологом (10), курс АВС-т ерапии (20), кодирование по Довженко.</div>
+                        <div class="p-desc">Гипнотерапия (10), занятия с психологом (10), курс АВС-терапии (20), кодирование по Довженко.</div>
                     </div>
                 </div>
             </div>
 
             <!-- 5. НЕВРОЛОГИЯ -->
             <div class="price-cat">
-                <div class="price-head">5. Неврология <i class="fas fa-chevron-down"></i></div>
+                <div class="price-head">Лечение неврологических расстройств <i class="fas fa-chevron-down"></i></div>
                 <div class="price-body">
                     <div class="p-row"><span class="p-name">Амбулаторный курс «Базовый» (10 дней)</span><span class="p-price">45.000 ₽</span></div>
                     <div class="p-row"><span class="p-name">Амбулаторный курс «Расширенный» (10 дней)</span><span class="p-price">55.000 ₽</span></div>
@@ -673,7 +369,7 @@
 
             <!-- 6. ПСИХОТЕРАПИЯ -->
             <div class="price-cat">
-                <div class="price-head">6. Психотерапия <i class="fas fa-chevron-down"></i></div>
+                <div class="price-head">Психотерапия <i class="fas fa-chevron-down"></i></div>
                 <div class="price-body">
                     <div class="p-row"><span class="p-name">Кодирование от лишнего веса (3 сеанса)</span><span class="p-price">15.000 ₽</span></div>
                     <div class="p-row"><span class="p-name">Уникальный курс гипнотерапии веса (10 сеансов)</span><span class="p-price">30.000 ₽</span></div>
@@ -681,56 +377,63 @@
                         <span class="p-name">Программное лечение Невроза</span>
                         <span class="p-price">60.000 ₽</span>
                         <div class="p-desc">Психотерапевт, препараты, гипнотерапия (10), психолог (10).</div>
-                    </div>
-                    <div class="p-row"><span class="p-name">Стационарный курс лечения Неврозов (10-14 дней)</span><span class="p-price">85.000 ₽</span></div>
+                    </div><div class="p-row"><span class="p-name">Стационарный курс лечения Неврозов (10-14 дней)</span><span class="p-price">85.000 ₽</span></div>
                 </div>
             </div>
-</div>
-    </section>
-
-    <!-- НОВАЯ СЕКЦИЯ: ГАЛЕРЕЯ СТАНЦИОНАРА -->
-    <section id="stationary-gallery">
-        <div class="glass-panel">
-            <h2 class="section-title">Наш стационар</h2>
-            <div class="stationary-gallery-grid">
-                <!-- Добавлена первая фотография, если она существует -->
-                <div class="gallery-item"><img src="1 (1).webp" alt="Фото стационара 1"></div>
-                <div class="gallery-item"><img src="1 (2).webp" alt="Фото стационара 2"></div>
-                <div class="gallery-item"><img src="1 (3).webp" alt="Фото стационара 3"></div>
-                <div class="gallery-item"><img src="1 (4).webp" alt="Фото стационара 4"></div>
-                <div class="gallery-item"><img src="1 (5).webp" alt="Фото стационара 5"></div>
-                <div class="gallery-item"><img src="1 (6).webp" alt="Фото стационара 6"></div>
-                <div class="gallery-item"><img src="1 (7).webp" alt="Фото стационара 7"></div>
-                <div class="gallery-item"><img src="1 (8).webp" alt="Фото стационара 8"></div>
-                <div class="gallery-item"><img src="1 (9).webp" alt="Фото стационара 9"></div>
-                <div class="gallery-item"><img src="1 (10).webp" alt="Фото стационара 10"></div>
-                <div class="gallery-item"><img src="1 (11).webp" alt="Фото стационара 11"></div>
-            </div>
-            <p style="text-align: center; margin-top: 30px; font-size: 1.1em; color: rgba(255,255,255,0.8);">Комфорт и забота для вашего скорейшего выздоровления.</p>
         </div>
     </section>
 
-    <section id="lic">
+    <section id="doctors">
         <div class="glass-panel">
-            <h2 class="section-title">Официальные документы</h2>
-            <div class="blanks-grid">
-                <div class="official-blank">
-                    <div class="blank-header"><h4>РОСПОТРЕБНАДЗОР РОССИЙСКОЙ ФЕДЕРАЦИИ</h4></div>
-                    <p style="text-align:center; font-weight:bold;">САНИТАРНО-ЭПИДЕМИОЛОГИЧЕСКОЕ ЗАКЛЮЧЕНИЕ</p>
-                    <p style="margin-top:20px;">№ 16.11.18.000.M.002234.10.25 от 15.10.2025 г.</p>
-                    <p style="margin-top:15px;">Настоящим документом удостоверяется соответствие медицинской деятельности <b>ООО "МЕДРЕН"</b> государственным санитарно-эпидемиологическим правилам и нормам.</p>
-                    <p style="margin-top:10px;">Адрес: РТ, г. Набережные Челны, Автозаводский пр-кт, 22А.</p>
-                    <div class="stamp">РОСПОТРЕБНАДЗОР<br>РТ</div>
+            <h2 class="section-title">Наши специалисты</h2>
+            <div class="doc-grid">
+                <div class="doc-card">
+                    <img src="https://prodoctorov.ru/media/photo/naberezhnye-chelny/doctorimage/112755/206464-112755-pichugin_square.jpg" class="doc-img">
+                    <div class="doc-info"><h3>Пичугин Олег Леонидович</h3><p>Врач анестезиолог-реаниматолог</p></div>
                 </div>
-                <div class="official-blank">
-                    <div class="blank-header"><h4>КАРТА ПАРТНЕРА ООО «МЕДРЕН»</h4></div>
-                    <table style="width:100%; border-collapse: collapse; margin-top:20px;">
-                        <tr><td style="padding:10px; border:1px solid #ccc;">ИНН / КПП</td><td style="padding:10px; border:1px solid #ccc;">1674012156 / 167401001</td></tr>
-                        <tr><td style="padding:10px; border:1px solid #ccc;">ОГРН</td><td style="padding:10px; border:1px solid #ccc;">1251600031638</td></tr>
-                        <tr><td style="padding:10px; border:1px solid #ccc;">БАНК</td><td style="padding:10px; border:1px solid #ccc;">АО "АЛЬФА-БАНК"</td></tr>
-                        <tr><td style="padding:10px; border:1px solid #ccc;">ДИРЕКТОР</td><td style="padding:10px; border:1px solid #ccc;">СУРИКОВА Ю.К.</td></tr>
-                    </table>
-                    <div class="stamp" style="right: auto; left: 30px;">МЕДРЕН<br>ДЛЯ ДОКУМЕНТОВ</div>
+                <div class="doc-card">
+                    <img src="https://prodoctorov.ru/media/photo/naberezhnye-chelny/doctorimage/799715/2215690-799715-halimov_square.jpg" class="doc-img">
+                    <div class="doc-info"><h3>Халимов Ренат Рамилевич</h3><p>Врач психотерапевт-нарколог</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="stationary">
+        <div class="glass-panel">
+            <h2 class="section-title">Условия стационара</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="1 (1).webp"></div>
+                <div class="gallery-item"><img src="1 (2).webp"></div>
+                <div class="gallery-item"><img src="1 (3).webp"></div>
+                <div class="gallery-item"><img src="1 (4).webp"></div>
+                <div class="gallery-item"><img src="1 (5).webp"></div>
+                <div class="gallery-item"><img src="1 (6).webp"></div>
+                <div class="gallery-item"><img src="1 (7).webp"></div>
+                <div class="gallery-item"><img src="1 (8).webp"></div>
+                <div class="gallery-item"><img src="1 (9).webp"></div>
+                <div class="gallery-item"><img src="1 (10).webp"></div>
+                <div class="gallery-item"><img src="1 (11).webp"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="docs">
+        <div class="glass-panel">
+            <h2 class="section-title">Лицензии и документы</h2>
+            <div class="blanks-flex">
+                <div class="blank">
+                    <h4>ЛИЦЕНЗИЯ РОСПОТРЕБНАДЗОРА</h4>
+                    <p>№ 16.11.18.000.M.002234.10.25</p>
+                    <p>ООО "МЕДРЕН" соответствует всем государственным стандартам оказания медицинской помощи.</p>
+                    <div class="stamp">МЕДРЕН<br>ЛИЦЕНЗИЯ</div>
+                </div>
+                <div class="blank">
+                    <h4>РЕКВИЗИТЫ ОРГАНИЗАЦИИ</h4>
+                    <p>ИНН: 1674012156</p>
+                    <p>ОГРН: 1251600031638</p>
+                    <p>Директор: Сурикова Ю.К.</p>
+                    <div class="stamp">МЕДРЕН<br>ПЕЧАТЬ</div>
                 </div>
             </div>
         </div>
@@ -738,37 +441,28 @@
 
     <section id="map-sec">
         <div class="glass-panel">
-            <h2 class="section-title">Наш адрес</h2>
-            <p style="text-align:center; font-weight:900; color:var(--accent-text); margin-bottom:20px;">Автозаводский проспект, 22А (Бизнес-Центр)</p>
-            
-            <div class="map-container">
-                <iframe src="https://yandex.ru/map-widget/v1/?from=mapframe&ll=52.428398%2C55.756771&mode=poi&poi%5Bpoint%5D=52.427751%2C55.756797&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D221352569028&z=17.-99" 
-                        width="100%" 
-                        height="445" 
-                        frameborder="0" 
-                        allowfullscreen="true"></iframe>
-                <!-- Эти ссылки - подписи Яндекса. Можешь их удалить, если не нужны, но они стилизованы -->
-                <a href="https://yandex.ru/maps/org/olimp/221352569028/?utm_medium=mapframe&utm_source=maps" target="_blank" rel="noopener noreferrer">Олимп</a>
-                <a href="https://yandex.ru/maps/236/naberezhnye-chelny/category/business_center/184107509/?utm_medium=mapframe&utm_source=maps" target="_blank" rel="noopener noreferrer">Бизнес-центр в Набережных Челнах</a>
+            <h2 class="section-title">Где мы находимся</h2>
+            <p style="text-align:center; margin-bottom:20px; font-weight:700;">Набережные Челны, Автозаводский проспект, 22А</p>
+            <div class="map-box">
+                <iframe src="https://yandex.ru/map-widget/v1/?from=mapframe&ll=52.428398%2C55.756771&mode=poi&poi%5Bpoint%5D=52.427751%2C55.756797&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D221352569028&z=16" width="100%" height="100%" frameborder="0"></iframe>
             </div>
-            
         </div>
     </section>
 
 </div>
 
 <div class="floats">
-    <a href="https://max.ru" class="f-btn f-max" title="MAX" target="_blank" rel="noopener noreferrer"><i class="fas fa-comment-medical"></i></a>
-    <a href="https://wa.me/79397305399" class="f-btn f-wa" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
-    <a href="https://t.me/medren16rus" class="f-btn f-tg" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram-plane"></i></a>
+    <a href="https://wa.me/79397305399" class="f-btn f-wa"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://t.me/Y198130" class="f-btn f-tg"><i class="fab fa-telegram-plane"></i></a>
     <a href="tel:+79397305399" class="f-btn f-call"><i class="fas fa-phone"></i></a>
 </div>
 
 <script>
-    // Скрипт для сворачивания категорий цен
-    document.querySelectorAll('.price-head').forEach(header => {
-        header.addEventListener('click', () => {
-            header.parentElement.classList.toggle('active');
+    // Аккордеон для прайса
+    document.querySelectorAll('.price-head').forEach(button => {
+        button.addEventListener('click', () => {
+            const cat = button.parentElement;
+            cat.classList.toggle('active');
         });
     });
 </script>
